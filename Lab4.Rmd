@@ -44,6 +44,7 @@ height.fit=fitted(spruce.lm) #fitted values
 #plot of residuals v. fitted
 trendscatter(height.res~height.fit, f=0.5)
 ```
+
 The residuals vs. fitted value make a very messy plot, and the trendscatter function tries to smooth them into a roughly quadratic shape, even though it barely fits the data. The model does not seem appropriate.
 
 ```{r}
@@ -59,6 +60,7 @@ title(main="Roughly Normal Distribution")
 mean(height.res)
 I(sd(height.res))^2
 ```
+
 The p-value $=0.29$ for the linear model. This is much higher than the necessary $0.05$ to reject the null hypothesis.
 Additionally, the mean of the residuals is approximately $-3.09*10^{-17}$, extremely close to 0. $\sigma^2=2.734$ and so the linear model is validly applied to the SPRUCE data set, though there are still better models.
 
@@ -112,6 +114,7 @@ $\hat{y}=0.86089580 + 1.46959217x+-0.02745726x^2$ where $\hat{y}$ is the estimat
 ```{r}
 predict(quad.lm, data.frame(BHDiameter=c(15,18,20)))
 ```
+
 Let the quadratic model of the data be called $q$. Then,
 
 $q(15)=16.72690\\q(18)=18.41740\\q(20)=19.26984$
@@ -124,6 +127,7 @@ The multiple $R^2$ of the quadratic model is equivalent to $0.7741$. For the lin
 ```{r}
 anova(spruce.lm, quad.lm)
 ```
+
 Model 2, the quadratic model, has a significantly smaller RSS value. I conclude that it better fits the model than does Model 1.
 
 ### MSS
