@@ -234,3 +234,4 @@ title(main="Piecewise Regression with Personal Package")
 curve(MATH4753moom0002::piecefunc(x, piecewise=piecewise, changepoint=chgpoint), add=TRUE)
 ```
 
+I added the piecewise function here to my R package. While I named the function the same that I named the one in this file, I made sure to use an explicit call to my package so that it would be distinguishable. I.E. MATH4753moom0002::piecewise(). It also has different arguments.
