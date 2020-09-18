@@ -1764,9 +1764,9 @@ summary(quad2.lm)</code></pre>
 <p>Letting these two lines be equal at <span class="math inline">\(x_k\)</span>, we find that,</p>
 <p><span class="math inline">\(\beta_0+\beta_1x_k=\beta_0+\delta+(\beta_1+\zeta)x_k\\ \implies \beta_1x_k = \delta+\beta_1x_k+\zeta x_k\\ \implies \delta=-\zeta x_k\)</span></p>
 <p>Finally, we can write <span class="math inline">\(l2\)</span> as,</p>
-<p><span class="math inline">\(\hat{y_2}=\beta_0+(\beta_1+\tau)x-\tau x_k\\ = \beta_0 + \beta_1x + \zeta(x-x_k)\)</span>.</p>
+<p><span class="math inline">\(\hat{y_2}=\beta_0+(\beta_1+\zeta)x-\zeta x_k\\ = \beta_0 + \beta_1x + \zeta(x-x_k)\)</span>.</p>
 <p>We add the condition that <span class="math inline">\(\tau (x-x_k)\)</span> evaluates to <span class="math inline">\(0\)</span> when <span class="math inline">\(x&lt;x_k\)</span> to get the equation of a piecewise function combining the two lines with change point <span class="math inline">\(x_k\)</span>. Finally, we have that</p>
-<p><span class="math inline">\(\hat{y}=\beta_0+\beta_1x+\tau(x-x_k)I(x&gt;x_k)\)</span>.</p>
+<p><span class="math inline">\(\hat{y}=\beta_0+\beta_1x+\zeta(x-x_k)I(x&gt;x_k)\)</span>.</p>
 </div>
 <div id="piecewise-regression" class="section level3">
 <h3>Piecewise Regression</h3>

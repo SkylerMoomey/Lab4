@@ -192,11 +192,11 @@ $\beta_0+\beta_1x_k=\beta_0+\delta+(\beta_1+\zeta)x_k\\ \implies \beta_1x_k = \d
 
 Finally, we can write $l2$ as,
 
-$\hat{y_2}=\beta_0+(\beta_1+\tau)x-\tau x_k\\ = \beta_0 + \beta_1x + \zeta(x-x_k)$.
+$\hat{y_2}=\beta_0+(\beta_1+\zeta)x-\zeta x_k\\ = \beta_0 + \beta_1x + \zeta(x-x_k)$.
 
 We add the condition that $\tau (x-x_k)$ evaluates to $0$ when $x<x_k$ to get the equation of a piecewise function combining the two lines with change point $x_k$. Finally, we have that
 
-$\hat{y}=\beta_0+\beta_1x+\tau(x-x_k)I(x>x_k)$.
+$\hat{y}=\beta_0+\beta_1x+\zeta(x-x_k)I(x>x_k)$.
 
 ### Piecewise Regression
 ```{r}
