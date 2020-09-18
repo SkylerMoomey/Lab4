@@ -84,4 +84,4 @@ mean(quad.res)
 I(sd(quad.res))^2
 
 ```
-The quadratic model's p-value is 0.684, which allows us to accept the null hypothesis. The mean of the residuals is once again close to $0$ $\mu=-3.47*10^{-17}$, so the model is once again a valid estimator of the data.
+The quadratic model's p-value is 0.684, which allows us to accept the null hypothesis. The mean of the residuals is once again close to $0$ $\mu=-3.47*10^{-17}$, so the model is again a valid estimator of the data.
