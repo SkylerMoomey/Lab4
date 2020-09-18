@@ -3,7 +3,7 @@ title: "Lab4"
 author: "Skyler Moomey"
 date: "`r Sys.Date()`"
 output: 
-html_document:
+  html_document:
     toc: yes
     toc_float: yes
 ---
@@ -159,3 +159,41 @@ I(MSS/TSS)
 ```
 
 ## Task 6
+
+### Cook's Plot
+```{r}
+cooks20x(quad.lm)
+```
+
+A Cook's Distance is a combination of the residual for a particular datum as well as it's leverage, i.e. how much influence it has on your model. As we can see, datum 24 has a particularly large Cook's Distance relative to the other data points, and could potentially be skewing our model.
+
+### Quadratic Model using BHDiameter$\backslash\{24\}$
+```{r}
+quad2.lm=lm(Height~BHDiameter + I(BHDiameter^2) , data=spruce.df[-24,])
+summary(quad2.lm)
+```
+
+The multiple $R^2$ of the new quadratic model is $0.8159$, versus the previous model's $0.7741$. Removing the single datum associated with observation 24 improved the model's accuracy by $0.8159-0.7741=0.0418$, approximately a $4\%$ improvement.
+
+## Task 7
+
+### Proof of Equation of Piecewise Function:
+Let a line, call it $l1$, be given by the equation $\hat{y_1}=\beta_0 + \beta_1x$. Let a second line, $l2$, be given by the equation $\hat{y_2}=\gamma_0 + \gamma_1x$. Then, $\gamma_0$ is equal to $\beta_0$ plus some constant, say $\delta$, and $\gamma_1$ is equal $\beta_1$ plus some constant, say $\zeta$.
+
+Then, we have that,
+
+$\hat{y_1}=\beta_0+\beta_1x\\ \hat{y_2}=(\beta_0+\delta) + (\beta_1+\zeta)x.$
+
+At some point on the domain of the two lines,we would like to have a change point $x_k$, which is the point at which the image of the function will be represented by $l2$ instead of $l1$.
+
+Letting these two lines be equal at $x_k$, we find that,
+
+$\beta_0+\beta_1x_k=\beta_0+\delta+(\beta_1+\zeta)x_k\\ \implies \beta_1x_k = \delta+\beta_1x_k+\zeta x_k\\ \implies \delta=-\zeta x_k$
+
+Finally, we can write $l2$ as,
+
+$\hat{y_2}=\beta_0+(\beta_1+\tau)x-\tau x_k\\ = \beta_0 + \beta_1x + \zeta(x-x_k)$.
+
+We add the condition that $\tau (x-x_k)$ evaluates to $0$ when $x<x_k$ to get the equation of a piecewise function combining the two lines with change point $x_k$. Finally, we have that
+
+$\hat{y}=\beta_0+\beta_1x+\tau(x-x_k)I(x>x_k)$.
