@@ -44,7 +44,7 @@ height.fit=fitted(spruce.lm) #fitted values
 #plot of residuals v. fitted
 trendscatter(height.res~height.fit, f=0.5)
 ```
-The residuals vs. fitted value make a very messy plot, and the trendscatter function tries to smooth them into a roughly quadratic shape, even though it barely fits the data.
+The residuals vs. fitted value make a very messy plot, and the trendscatter function tries to smooth them into a roughly quadratic shape, even though it barely fits the data. The model does not seem appropriate.
 
 ```{r}
 with(data=spruce.df, plot(x=BHDiameter, y=Height, pch=21, ylab="Height of Tree(m)", xlab="Diameter at Breast Height (cm)", bg="blue", 
@@ -79,9 +79,78 @@ curve(myplot, lwd=2, add=TRUE, col="purple")
 
 plot(quad.lm, which=1)
 
-normcheck(quad.lm, shapiro.wilk= TRUE, main="Normal Distribution Check")
+normcheck(quad.lm, shapiro.wilk= TRUE)
+title(main="Normal Distribution Check")
 mean(quad.res)
 I(sd(quad.res))^2
 
 ```
-The quadratic model's p-value is 0.684, which allows us to accept the null hypothesis. The mean of the residuals is once again close to $0$ $\mu=-3.47*10^{-17}$, so the model is again a valid estimator of the data.
+The quadratic model's p-value is 0.684, which allows us to accept the null hypothesis . The mean of the residuals is once again close to $0$, $\mu=-3.47*10^{-17}$, and $\sigma$ is constant, so the model is again a valid estimator of the data.
+
+## Task 5
+
+### Summary
+```{r}
+summary(quad.lm)
+```
+### Coefficients
+```{r}
+coef(quad.lm)
+```
+
+$\hat{\beta_0}=0.860896\\ \hat{\beta_1}=1.469592\\ \hat{\beta_2}=-0.027457$
+
+### Interval Estimates
+```{r}
+ciReg(quad.lm)
+```
+
+### Equation of Fitted Line
+$\hat{y}=0.86089580 + 1.46959217x+-0.02745726x^2$ where $\hat{y}$ is the estimate of the Height and $x$ corresponds to the Breast Height Diameter of a given sample.
+
+### Some Predictions
+```{r}
+predict(quad.lm, data.frame(BHDiameter=c(15,18,20)))
+```
+Let the quadratic model of the data be called $q$. Then,
+
+$q(15)=16.72690\\q(18)=18.41740\\q(20)=19.26984$
+
+### Multiple R-Squared
+
+The multiple $R^2$ of the quadratic model is equivalent to $0.7741$. For the linear model, multiple $R^2$ is $0.6569$. Adjusted $R^2$ is, respectively $0.7604$ and $0.6468$. Because adjusted $R^2$ accounts for non-useful coeffecients, it can give a better idea of the variability explained by the curve. The quadratic model does a better job of this than the linear model. Multiple $R^2$, by contrast, shows the amount of variability in the dependent variable that is captured by the independent variable. However, because of the way $R^2$ is calculated, it will always increase when new terms are added to our linear model, even if they don't actually make the estimate better. For this reason, adjusted $R^2$ can be a more "honest" estimate of the variability explained by a model with many terms.
+
+### Anova
+```{r}
+anova(spruce.lm, quad.lm)
+```
+Model 2, the quadratic model, has a significantly smaller RSS value. I conclude that it better fits the model than does Model 1.
+
+### MSS
+```{r}
+yhat2=with(spruce.df, predict(quad.lm, data.frame(BHDiameter)))
+MSS=sum(I(yhat2-mean(spruce.df$Height))^2)
+MSS
+```
+
+### RSS
+```{r}
+RSS=sum(I(quad.res)^2)
+RSS
+```
+### TSS
+```{r}
+TSS=sum(I(spruce.df$Height-mean(spruce.df$Height))^2)
+TSS
+```
+### Consistency check
+```{r}
+RSS + MSS
+TSS
+```
+
+### MSS/TSS
+```{r}
+I(MSS/TSS)
+```
+
