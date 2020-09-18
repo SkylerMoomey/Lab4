@@ -197,3 +197,27 @@ $\hat{y_2}=\beta_0+(\beta_1+\tau)x-\tau x_k\\ = \beta_0 + \beta_1x + \zeta(x-x_k
 We add the condition that $\tau (x-x_k)$ evaluates to $0$ when $x<x_k$ to get the equation of a piecewise function combining the two lines with change point $x_k$. Finally, we have that
 
 $\hat{y}=\beta_0+\beta_1x+\tau(x-x_k)I(x>x_k)$.
+
+### Piecewise Regression
+```{r}
+sp2.df=within(spruce.df, X<-(BHDiameter-18)*(BHDiameter>18)) # this makes a new variable and places it within the same df
+
+chgpoint=18
+
+piecewise=lm(Height~BHDiameter + X, data=sp2.df)
+summary(piecewise)
+
+#creates vector for plotting piecewise regression, (x>chgpoint) is the indicator term
+piecefunc=function(x) {
+  piecewise$coefficients[1]+piecewise$coefficients[2]*(x)+piecewise$coefficients[3]*(x-chgpoint)*(x>chgpoint)
+}
+
+with(spruce.df, plot(BHDiameter, Height, xlab= "Tree Diameter at Breast Height (cm)"
+                     , ylab="Tree Height (m)", pch=21, bg="black", cex=1.2
+                     , xlim=c(0, 1.1*max(BHDiameter)), ylim=c(0, 1.1*max(Height))))
+title(main="Piecewise Regression")
+abline(v=chgpoint, col="purple")
+curve(piecefunc, add=TRUE, col="purple")
+text(18,14,paste("R sq.=",round(summary(piecewise)$r.squared,4) ))
+```
+
