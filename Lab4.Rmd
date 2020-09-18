@@ -220,4 +220,17 @@ abline(v=chgpoint, col="purple")
 curve(piecefunc, add=TRUE, col="purple")
 text(18,14,paste("R sq.=",round(summary(piecewise)$r.squared,4) ))
 ```
+## Task 8
+
+### Using Function from Personal R Package
+```{r}
+library(MATH4753moom0002)
+
+with(spruce.df, plot(BHDiameter, Height, xlab= "Tree Diameter at Breast Height (cm)"
+                     , ylab="Tree Height (m)", pch=21, bg="black", cex=1.2
+                     , xlim=c(0, 1.1*max(BHDiameter)), ylim=c(0, 1.1*max(Height))))
+title(main="Piecewise Regression with Personal Package")
+
+curve(MATH4753moom0002::piecefunc(x, piecewise=piecewise, changepoint=chgpoint), add=TRUE)
+```
 

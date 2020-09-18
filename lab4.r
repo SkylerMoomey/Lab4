@@ -281,7 +281,7 @@ RSS
 ## piecewise linear model in R
 ## Model y = b0 + b1x + b2(x-xk)*(x>xk)
 ## You will need to change the code appropriately
-sp2.df=within(spruce.df, X<-(BHDiameter-20)*(BHDiameter>20)) # this makes a new variable and places it within the same df
+sp2.df=within(spruce.df, X<-(BHDiameter-18)*(BHDiameter>18)) # this makes a new variable and places it within the same df
 sp2.df
 
 lmp=lm(Height~BHDiameter + X,data=sp2.df)
