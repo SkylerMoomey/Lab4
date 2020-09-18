@@ -220,6 +220,7 @@ abline(v=chgpoint, col="purple")
 curve(piecefunc, add=TRUE, col="purple")
 text(18,14,paste("R sq.=",round(summary(piecewise)$r.squared,4) ))
 ```
+
 ## Task 8
 
 ### Using Function from Personal R Package
